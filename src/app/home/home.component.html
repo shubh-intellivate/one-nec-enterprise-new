@@ -1,0 +1,369 @@
+<div class="content-wrapper">
+    <div class="col-xl-13 d-flex grid-margin stretch-card mt-3">
+        <div class="card">
+        <div class="card-body">
+            <div class="row">
+            <div class="col-12">
+                <div class="d-sm-flex justify-content-between">
+                <div>
+                    <input style="float:left;"
+                        type="date"
+                        class="transition_input"
+                        [(ngModel)]="incidentFromDate"
+                        placeholder="Start Date"
+                    />
+                    <label style="float:left; clear:left; margin-left:20%; margin-top:10%;" class="selet_label">Start Date</label>
+                    </div>
+                    <div>
+                    <input style="float:left;"
+                        type="date"
+                        class="transition_input"
+                        [(ngModel)]="incidenToDate"
+                    />
+                    <label style="float:left; clear:left; margin-left:20%; margin-top:10%;" class="selet_label">End Date</label>
+                    </div>
+                    <div>
+                    <select style="float:left;" [(ngModel)]="selectedIncidentsValue"> 
+                        <option [ngValue]="null" disabled>Select Status</option>
+                        <option *ngFor="let incidents of incidentStatusProvider" [ngValue]="incidents">{{incidents}}</option>
+                    </select>
+                    <label style="float:left; clear:left; margin-left:25%; margin-top:15%;" class="selet_label">Status</label>
+                    </div>
+                    <div>
+                    <button type="button" class="btn btn-sm btn-light" (click)="getIncidentRequestFilter('NECADM', incidentFromDate, incidenToDate, selectedIncidentsValue)" >Submit</button>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h3 class="mb-0 font-weight-bold"></h3>
+            <span class="title-underline">
+            Incidents
+            </span>
+        </div>
+    </div>
+    <div class="row  mt-3">
+        <div class="col-xl-4 d-flex grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+            <div class="d-flex flex-wrap justify-content-between">
+                <h4 class="card-title mb-3">Total Incidents</h4>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                <div class="mr-1">
+                    <h2 class="mb-2 mt-2 font-weight-bold" style="color: #A3A1FB">{{totalIncidentRequest}}</h2>
+                    <div class="font-weight-bold grey-color">
+                        
+                    </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+        <div class="col-xl-4 d-flex grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+            <div class="d-flex flex-wrap justify-content-between">
+                <h4 class="card-title mb-3">Open Incidents</h4>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                <div class="mr-1">
+                    <h2 class="mb-2 mt-2 font-weight-bold text-warning">{{totalOpenStatusIncidentRequest}}</h2>
+                    <div class="font-weight-bold grey-color">
+                        
+                    </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+        <div class="col-xl-4 d-flex grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+            <div class="d-flex flex-wrap justify-content-between">
+                <h4 class="card-title mb-3">Closed Incidents</h4>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                <div class="mr-1">
+                    <h2 class="mb-2 mt-2 font-weight-bold text-success">{{totalClosedStatusIncidentRequest}}</h2>
+                    <div class="font-weight-bold grey-color">
+                        
+                    </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-xl-6 d-flex grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+            <div class="d-flex flex-wrap justify-content-between">
+                <h4 class="card-title mb-3">Admin Incident requests</h4>
+            </div>
+            <div class="row">
+                <!-- <google-chart 
+                [type]="incidentDonuttype" 
+                [data]="incidentsDonutdata"
+                [options]="incidentsDonutoptions"  
+                [width]="incidentsDonutwidth"  
+                [height]="hincidentsDonuteight">  
+            </google-chart> -->
+            <div id="chart-pie-lost-opp"></div>
+            </div>
+            </div>
+        </div>
+        </div>
+
+        <div class="col-xl-6 d-flex grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+            <div class="d-flex flex-wrap justify-content-between">
+                <h4 class="card-title mb-3">BU Wise Incidents Request</h4>
+            </div>
+            <div class="row">
+                <div id="bu-wise"></div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h3 class="mb-0 font-weight-bold"></h3>
+            <span class="title-underline">
+            Service Requests
+            </span>
+        </div>
+    </div>
+    <div class="row  mt-3">
+        <div class="col-xl-4 d-flex grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+            <div class="d-flex flex-wrap justify-content-between">
+                <h4 class="card-title mb-3">Total Service Requests</h4>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                <div class="mr-1">
+                    <h2 class="mb-2 mt-2 font-weight-bold" style="color: #A3A1FB"></h2>
+                    <div class="font-weight-bold grey-color">
+                        
+                    </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+        <div class="col-xl-4 d-flex grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+            <div class="d-flex flex-wrap justify-content-between">
+                <h4 class="card-title mb-3">Open Service Requests</h4>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                <div class="mr-1">
+                    <h2 class="mb-2 mt-2 font-weight-bold text-warning"></h2>
+                    <div class="font-weight-bold grey-color">
+                        
+                    </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+        <div class="col-xl-4 d-flex grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+            <div class="d-flex flex-wrap justify-content-between">
+                <h4 class="card-title mb-3">Closed Service Requests</h4>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                <div class="mr-1">
+                    <h2 class="mb-2 mt-2 font-weight-bold text-success"></h2>
+                    <div class="font-weight-bold grey-color">
+                        
+                    </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-xl-6 d-flex grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+            <div class="d-flex flex-wrap justify-content-between">
+                <h4 class="card-title mb-3">Admin Service Requests</h4>
+            </div>
+            <div class="row">
+                <!-- <google-chart 
+                [type]="incidentDonuttype" 
+                [data]="incidentsDonutdata"
+                [options]="incidentsDonutoptions"  
+                [width]="incidentsDonutwidth"  
+                [height]="hincidentsDonuteight">  
+            </google-chart> -->
+            <div id="admin-sr"></div>
+            </div>
+            </div>
+        </div>
+        </div>
+
+        <div class="col-xl-6 d-flex grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+            <div class="d-flex flex-wrap justify-content-between">
+                <h4 class="card-title mb-3">BU Wise Service Requests</h4>
+            </div>
+            <div class="row">
+                <div id="bu-wise-sr"></div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h3 class="mb-0 font-weight-bold"></h3>
+            <span class="title-underline">
+            Cabs
+            </span>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-xl-2 grid-margin">
+        <div class="card" style="background-color: #6DBCDB;color: white;">
+            <div class="card-body">
+            <div class="d-flex flex-wrap justify-content-between">
+                <h4 class="card-title mb-3"></h4>
+            </div>
+            <div class="row">
+                <div class="col-12" style="padding: 0 !important">
+                <div class="mr-1 text-center">
+                    <i class="fa fa-car mr-0" style="font-size: 1.75rem;"></i>
+                    <div class="font-weight-bold">
+                        Total Cab Requests Raised
+                    </div>
+                    <h2 class="mb-2 mt-2 font-weight-bold">{{totalCabRequests}}</h2>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+        <div class="col-xl-4 d-flex grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+            <div class="d-flex flex-wrap justify-content-between">
+                <h4 class="card-title mb-3">Cab Requests Shift</h4>
+                <!-- <button type="button" class="btn btn-sm btn-light">Month</button> -->
+            </div>
+            <div class="row">
+                <div class="col-12">
+                <!-- <div id="circleProgress6" class="progressbar-js-circle rounded p-3"></div> -->
+                <div id="cab-requests"></div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+        <div class="col-xl-6 d-flex grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+            <div class="d-flex flex-wrap justify-content-between">
+                <h4 class="card-title mb-3">Cab Request Status</h4>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                <div class="d-sm-flex justify-content-between">
+                    <div class="dropdown">
+                    <!-- <button class="btn bg-white btn-sm dropdown-toggle btn-icon-text pl-0" type="button" id="dropdownMenuSizeButton4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Mon,1 Oct 2019 - Tue,2 Oct 2019
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuSizeButton4" data-x-placement="top-start">
+                        <h6 class="dropdown-header">Mon,17 Oct 2019 - Tue,25 Oct 2019</h6>
+                        <a class="dropdown-item" href="#">Tue,18 Oct 2019 - Wed,26 Oct 2019</a>
+                        <a class="dropdown-item" href="#">Wed,19 Oct 2019 - Thu,26 Oct 2019</a>
+                    </div> -->
+                    </div>
+                </div>
+                <div id="cab-status"></div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+        <h3 class="mb-0 font-weight-bold"></h3>
+            <span class="title-underline">
+            Travels
+            </span>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-xl-4 d-flex grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+            <div class="d-flex flex-wrap justify-content-between">
+                <h4 class="card-title mb-3">Domestic/International</h4>
+                <!-- <button type="button" class="btn btn-sm btn-light">Month</button> -->
+            </div>
+            <div class="row">
+                <div class="col-12">
+                <div id="travel-requests-domestic"></div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+        <div class="col-xl-4 d-flex grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+            <div class="d-flex flex-wrap justify-content-between">
+                <h4 class="card-title mb-3">Billable/Non-Billable</h4>
+                <!-- <button type="button" class="btn btn-sm btn-light">Month</button> -->
+            </div>
+            <div class="row">
+                <div class="col-12">
+                <div id="travel-requests-bill"></div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+        <div class="col-xl-4 d-flex grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+            <div class="d-flex flex-wrap justify-content-between">
+                <h4 class="card-title mb-3">BU Wise Travel Requests</h4>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                <div id="travel-status"></div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>

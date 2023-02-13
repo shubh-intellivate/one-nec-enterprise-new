@@ -1,0 +1,20 @@
+{
+	"/api/*": {
+		"target": "https://neciapi.nectechnologies.in:6443/",
+		"secure": false,
+		"changeOrigin": true,
+		"pathRewrite": {
+		  "^/api": ""
+		},
+		"logLevel": "debug"
+	},
+	"/Chat_Api/*": {
+		"target": "https://ntichikettoseva.nectechnologies.in/",
+		"secure": false,
+		"changeOrigin": true,
+		"pathRewrite": {
+		  "^/Chat_Api": ""
+		},
+		"logLevel": "debug"
+	}
+}
